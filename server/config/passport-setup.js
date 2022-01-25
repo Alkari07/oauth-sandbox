@@ -28,7 +28,7 @@ passport.use(
     new TwitterStrategy({
         consumerKey: keys.TWITTER_CONSUMER_KEY,
         consumerSecret: keys.TWITTER_CONSUMER_SECRET,
-        callbackURL: '/auth/twitter/redirect'
+        callbackURL: 'http://127.0.0.1:4000/auth/twitter/redirect'
     },
     async(token, tokenSecret, profile, done)=> {
         //callback function when twitter auth succeeds

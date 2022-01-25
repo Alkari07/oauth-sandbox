@@ -1,5 +1,4 @@
 import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 export default function Header({authenticated, handleNotAuthenticated}) {
@@ -7,16 +6,14 @@ export default function Header({authenticated, handleNotAuthenticated}) {
   
     const _handleSignInClick = () => {
         //authenticate via passport api on backend
-        //window.open('http://localhost:4000/auth/twitter', '_self');
-        console.log("sign in click");
+        window.open('http://localhost:4000/auth/twitter', '_self');
     }
     const _handleLogoutClick = () => {
-        //window.open('http://localhost:4000/auth/logout', '_self');
-        console.log("sign out click");
+        window.open('http://localhost:4000/auth/logout', '_self');
         handleNotAuthenticated();
     }
   return <div>
-      <ul>
+      <ul className='menu'>
           <li>
               <Link to="/">Home</Link>
           </li>
