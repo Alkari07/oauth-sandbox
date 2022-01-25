@@ -5,6 +5,7 @@ const userSchema = new Schema({
     name: String,
     screenName: String,
     twitterId: String,
+    googleId: String,
     profileImageUrl: String
 });
 

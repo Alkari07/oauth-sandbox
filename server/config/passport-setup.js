@@ -1,5 +1,6 @@
 const passport = require('passport');
 const TwitterStrategy = require ('passport-twitter');
+const GoogleStrategy = require('passport-google-oidc');
 const keys = require('./keys');
 const User = require('../models/user-model');
 
@@ -44,6 +45,35 @@ passport.use(
                 screenName: profile._json.screen_name,
                 twitterId: profile._json.id_str,
                 profileImageUrl: profile._json.profile_image_url
+            }).save();
+            if (newUser) {
+                done(null, newUser);
+            }
+        }
+        done(null, currentUser);
+    }
+    )
+);
+
+passport.use(
+    new GoogleStrategy({
+        consumerKey: keys.GOOGLE_CLIENT_ID,
+        consumerSecret: keys.GOOGLE_CLIENT_SECRET,
+        callbackURL: 'http://127.0.0.1:4000/auth/google/redirect'
+    },
+    async(issuer, profile, done)=> {
+        //callback function when twitter auth succeeds
+
+        //find current user in UserModel
+        const currentUser = await User.findOne({
+            googleId: profile.id
+        });
+        //create new user if the DB doesn't have this user
+        if (!currentUser) {
+            const newUser = await new User({
+                name: profile.displayName,
+                screenName: profile.displayName,
+                googleId: profile.id,
             }).save();
             if (newUser) {
                 done(null, newUser);

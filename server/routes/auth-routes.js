@@ -31,8 +31,17 @@ router.get('/logout', (req, res) => {
 //twitter auth
 router.get('/twitter', passport.authenticate('twitter'));
 
+//google auth
+router.get('/google', passport.authenticate('google'))
+
 //redirect to home after successful login via twitter
 router.get('/twitter/redirect', passport.authenticate('twitter', {
+    successRedirect: CLIENT_HOME_PAGE_URL,
+    failureRedirect: '/auth/login/failed'
+}));
+
+//redirect to home after successful login via google
+router.get('/google/redirect', passport.authenticate('google', {
     successRedirect: CLIENT_HOME_PAGE_URL,
     failureRedirect: '/auth/login/failed'
 }));
