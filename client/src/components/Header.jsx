@@ -6,11 +6,14 @@ export default function Header({authenticated, handleNotAuthenticated}) {
   
     const _handleSignInClick = () => {
         //authenticate via passport api on backend
-        window.open('http://localhost:4000/auth/twitter', '_self');
+        window.open('http://127.0.0.1:4000/auth/twitter', '_self');
     }
     const _handleLogoutClick = () => {
-        window.open('http://localhost:4000/auth/logout', '_self');
+        window.open('http://127.0.0.1:4000/auth/logout', '_self');
         handleNotAuthenticated();
+    }
+    const _handleSignInGoogleClick = () => {
+        window.open('http://127.0.0.1:4000/auth/google', '_self');
     }
   return <div>
       <ul className='menu'>
@@ -20,7 +23,10 @@ export default function Header({authenticated, handleNotAuthenticated}) {
           {authenticated ? (
               <li onClick={_handleLogoutClick}>Logout</li>
           ) : (
-              <li onClick={_handleSignInClick}>Login</li>
+              <div>
+              <li onClick={_handleSignInClick}>Login Twitter</li>
+              <li onClick={_handleSignInGoogleClick}>Login Google</li>
+              </div>
           )}    
       </ul>
   </div>;

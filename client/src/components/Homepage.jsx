@@ -9,7 +9,7 @@ export default function Homepage() {
   });
 
   useEffect (() => {
-    fetch('http://localhost:4000/auth/login/success', {
+    fetch('http://127.0.0.1:4000/auth/login/success', {
         method: 'GET',
         credentials: 'include',
         headers: {

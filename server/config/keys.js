@@ -1,7 +1,5 @@
 const SECURITY_KEYS = require("../../security/security");
 
-SECURITY_KEYS = require( "../../security/security");
-
 const TWITTER_TOKENS = {
     TWITTER_CONSUMER_KEY: SECURITY_KEYS.apiKey,
     TWITTER_CONSUMER_SECRET: SECURITY_KEYS.apiKeySecret,

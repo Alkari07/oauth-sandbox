@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 4000;
 const passport = require('passport');
-const passportSetup = require('passport');
+const passportSetup = require("./config/passport-setup");
 const session = require("express-session");
 const authRoutes = require("./routes/auth-routes");
 const keys = require("./config/keys");
@@ -21,7 +21,8 @@ app.use(
     cookieSession({
         name: "session",
         keys: [keys.COOKIE_KEY],
-        maxAge: 24*60*60*100 //a day
+        maxAge: 24*60*60*100, //a day
+        secure: false
     })
 );
 
@@ -29,15 +30,15 @@ app.use(
 app.use(cookieParser());
 
 //initialize passport
-app.use(passport.initialize);
+app.use(passport.initialize());
 
-//deserialize cookie from the browser
+// //deserialize cookie from the browser
 app.use(passport.session());
 
 //setup cors to allow accepting of requests from the client
 app.use(
     cors({
-        origin: 'http://localhost:3000', //allow server to accept requests from this origin
+        origin: 'http://127.0.0.1:3000', //allow server to accept requests from this origin
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true //allow session cookie from browser to pass through
     })

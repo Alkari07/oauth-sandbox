@@ -57,13 +57,14 @@ passport.use(
 
 passport.use(
     new GoogleStrategy({
-        consumerKey: keys.GOOGLE_CLIENT_ID,
-        consumerSecret: keys.GOOGLE_CLIENT_SECRET,
-        callbackURL: 'http://127.0.0.1:4000/auth/google/redirect'
+        clientID: keys.GOOGLE_CLIENT_ID,
+        clientSecret: keys.GOOGLE_CLIENT_SECRET,
+        callbackURL: 'http://d22c-71-85-231-118.ngrok.io/auth/google/redirect',
+        scope: ['profile']
     },
     async(issuer, profile, done)=> {
         //callback function when twitter auth succeeds
-
+        console.log("Found a google profile: ", profile);
         //find current user in UserModel
         const currentUser = await User.findOne({
             googleId: profile.id
