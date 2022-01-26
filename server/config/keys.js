@@ -15,7 +15,7 @@ const TWITTER_TOKENS = {
   const DB_USER = SECURITY_KEYS.dbUser;
   const DB_PASSWORD = SECURITY_KEYS.dbPassword;
   const MONGODB = {
-    MONGODB_URI: `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.ramnp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+    MONGODB_URI: `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.ramnp.mongodb.net/oauthSandboxUsers?retryWrites=true&w=majority`
   };
   
   const SESSION = {

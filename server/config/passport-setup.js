@@ -59,7 +59,7 @@ passport.use(
     new GoogleStrategy({
         clientID: keys.GOOGLE_CLIENT_ID,
         clientSecret: keys.GOOGLE_CLIENT_SECRET,
-        callbackURL: 'http://d22c-71-85-231-118.ngrok.io/auth/google/redirect',
+        callbackURL: 'http://127.0.0.1:4000/auth/google/redirect',
         scope: ['profile']
     },
     async(issuer, profile, done)=> {
@@ -67,7 +67,7 @@ passport.use(
         console.log("Found a google profile: ", profile);
         //find current user in UserModel
         const currentUser = await User.findOne({
-            googleId: profile.id
+            googleId: profile.id.toString()
         });
         //create new user if the DB doesn't have this user
         if (!currentUser) {
@@ -79,8 +79,9 @@ passport.use(
             if (newUser) {
                 done(null, newUser);
             }
+        } else {
+            done(null, currentUser);
         }
-        done(null, currentUser);
     }
     )
 );

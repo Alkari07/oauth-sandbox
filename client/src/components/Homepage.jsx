@@ -19,10 +19,13 @@ export default function Homepage() {
         }
     })
         .then(responseJson=> {
-            setState({
-                authenticated: true,
-                user: responseJson.user
+            responseJson.json().then((userObj)=> {
+                setState({
+                    authenticated: true,
+                    user: userObj.user
+                });
             });
+            
         })
         .catch(error => {
             setState({

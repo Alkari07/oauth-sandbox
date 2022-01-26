@@ -13,8 +13,15 @@ const cookieParser = require("cookie-parser"); // parse cookie header
 
 //connect to mongodb via mongoose
 //mongoose provides a schema-based solution to model application data and handle database CRUD
-mongoose.connect(keys.MONGODB_URI, () => {
-    console.log("connected to mongo db");
+mongoose.connect(keys.MONGODB_URI, {keepAlive: true});
+mongoose.connection.on('connected', () => {
+    console.log("Connected to mongo db");
+});
+mongoose.connection.on('error', (err) => {
+    console.log("Mongoose default connection error: " + err);
+});
+mongoose.connection.on('disconnected', () => {
+    console.log("Disconnected from mongo db");
 });
 
 app.use(
@@ -72,4 +79,4 @@ app.get('/', authCheck, (req, res) => {
 
 //connect to nodejs express server
 app.listen(port, ()=> console.log(`Server is running on port ${port}`));
-
+//test
